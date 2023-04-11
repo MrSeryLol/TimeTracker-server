@@ -3,12 +3,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('HistoryOfWorks', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       history_id: {
         type: Sequelize.INTEGER
       },
@@ -31,13 +25,26 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       project_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Projects",
+          key: "project_id"
+        }
       },
       task_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Tasks",
+          key: "task_id"
+        }
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "user_id"
+        }
       },
       createdAt: {
         allowNull: false,

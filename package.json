@@ -13,13 +13,17 @@
   },
   "name": "timetracker_coursework",
   "version": "1.0.0",
-  "main": "env.config.js",
+  "main": "app.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "model:generate": "npx sequelize-cli model:generate",
     "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
-    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all"
+    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "seed:generate": "npx sequelize-cli seed:generate",
+    "seed:upload": "npx sequelize-cli db:seed:all",
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
