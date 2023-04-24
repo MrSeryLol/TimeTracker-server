@@ -1,13 +1,15 @@
-import express from "express";
-import dotenv from "dotenv";
-import bodyParser from "body-parser";
+const express = require('express')
+const dotenv = require('dotenv')
+const bodyParser = require('body-parser')
 dotenv.config();
+const router = require('./src/routes/index')
 
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/api', router)
 // parse application/x-www-form-urlencoded
 // parse application/json
 // app.use(bodyParser.json());

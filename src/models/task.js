@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Task.init({
     task_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrementIdentity: true,
       primaryKey: true
