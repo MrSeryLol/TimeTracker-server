@@ -9,20 +9,14 @@ module.exports = {
       starting_time: {
         type: Sequelize.DATE
       },
-      efficient_time: {
-        type: Sequelize.TIME
+      ending_time: {
+        type: Sequelize.DATE
       },
-      unefficient_time: {
+      efficient_time: {
         type: Sequelize.TIME
       },
       date: {
         type: Sequelize.DATEONLY
-      },
-      is_being_late: {
-        type: Sequelize.BOOLEAN
-      },
-      is_early_finished: {
-        type: Sequelize.BOOLEAN
       },
       project_id: {
         type: Sequelize.INTEGER,

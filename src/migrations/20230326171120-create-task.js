@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       task_name: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       task_description: {
         type: Sequelize.TEXT

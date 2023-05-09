@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Task.belongsToMany(models.User, { through: models.UserTask });
       Task.hasMany(models.UserTask);
-      Task.belongsTo(models.Project);
+      Task.belongsTo(models.Project, {foreignKey: 'project_id', as: 'tasks'});
       Task.hasMany(models.HistoryOfWork);
     }
   }
@@ -24,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrementIdentity: true,
       primaryKey: true
     },
-    task_name: DataTypes.INTEGER,
+    task_name: DataTypes.TEXT,
     task_description: DataTypes.TEXT,
     priority: DataTypes.ENUM('High', 'Medium', 'Low'),
-    project_id: DataTypes.INTEGER
+    project_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Task',
