@@ -12,12 +12,18 @@ module.exports = {
          *   isBetaMember: false
          * }], {});
         */
-        await queryInterface.bulkInsert('Companies', [
+        await queryInterface.bulkInsert('Roles', [
             {
-                company_id: 1,
-                company_name: "Крутая комапния",
-                createdAt: new Date(),
-                updatedAt: new Date()
+                role_id: 1,
+                role: "Руководитель",
+                created_at: new Date(),
+                updated_at: new Date()
+            },
+            {
+                role_id: 2,
+                role: "Сотрудник",
+                created_at: new Date(),
+                updated_at: new Date()
             }
         ]);
     },
@@ -29,6 +35,6 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete('Companies', null, {});
+        await queryInterface.bulkDelete('Users', null, {});
     }
 };

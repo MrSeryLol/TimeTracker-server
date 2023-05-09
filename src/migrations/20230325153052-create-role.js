@@ -10,7 +10,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       role: {
-        type: Sequelize.ENUM('Supervisor', 'Employee')
+        type: Sequelize.STRING,
+        defaultValue: "Руководитель",
+        allowNull: false
       },
       created_at: {
         allowNull: false,

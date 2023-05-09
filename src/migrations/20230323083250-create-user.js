@@ -24,16 +24,6 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      schedule_id: {
-        type: Sequelize.INTEGER
-      },
-      company_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Companies",
-          key: "company_id"
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
