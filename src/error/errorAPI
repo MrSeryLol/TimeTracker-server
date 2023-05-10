@@ -18,4 +18,4 @@ class ErrorAPI extends Error {
     }
 }
 
-module.exports = new ErrorAPI()
+module.exports = ErrorAPI

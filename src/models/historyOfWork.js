@@ -17,7 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   HistoryOfWork.init({
-    history_id: DataTypes.INTEGER,
+    history_id: {
+        type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     starting_time: DataTypes.DATE,
     ending_time: DataTypes.DATE,
     efficient_time: DataTypes.TIME,

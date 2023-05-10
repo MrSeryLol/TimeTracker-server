@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     project_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      autoIncrementIdentity: true,
+      autoIncrement: true,
       primaryKey: true
     },
     project_name: DataTypes.STRING,

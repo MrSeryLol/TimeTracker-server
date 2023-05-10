@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Company.hasMany(models.User);
+      Company.hasMany(models.User, {
+        foreignKey: 'company_id'
+      });
       Company.hasMany(models.Project, {
         foreignKey: 'project_id'
       });
@@ -20,9 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   Company.init({
     company_id: {
       type: DataTypes.INTEGER,
-      autoIncrementIdentity: true,
       primaryKey: true,
-      allowNull: false
+      autoIncrement: true,
     },
     company_name: DataTypes.STRING
   }, {

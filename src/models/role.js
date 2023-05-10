@@ -19,10 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     role_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false,
-      autoIncrementIdentity: true
+      autoIncrement: true
     },
-    role: DataTypes.ENUM('Supervisor', 'Employee')
+    role: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Role',

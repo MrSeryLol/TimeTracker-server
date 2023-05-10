@@ -4,7 +4,9 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('HistoryOfWorks', {
       history_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
       },
       starting_time: {
         type: Sequelize.DATE

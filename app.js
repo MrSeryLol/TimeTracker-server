@@ -2,6 +2,9 @@ const express = require('express')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser')
 dotenv.config();
+
+
+const errorHandler = require('./src/middleware/ErrorHandlingMiddleware')
 const router = require('./src/routes/index')
 
 
@@ -10,6 +13,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', router)
+
+//Обработка ошибок, последний Middleware
+app.use(errorHandler)
 // parse application/x-www-form-urlencoded
 // parse application/json
 // app.use(bodyParser.json());

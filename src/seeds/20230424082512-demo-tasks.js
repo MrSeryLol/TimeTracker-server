@@ -14,7 +14,7 @@ module.exports = {
         */
         await queryInterface.bulkInsert('Tasks', [
             {
-                task_id: 1,
+                
                 task_name: "Написать Hello World",
                 task_description: "Испытать успешную установку программы",
                 priority: Sequelize.literal(`'Low'::"enum_Tasks_priority"`),
@@ -23,7 +23,7 @@ module.exports = {
                 updatedAt: new Date()
             },
             {
-                task_id: 2,
+                
                 task_name: "Создать функцию сложения",
                 task_description: "Функция должна делать следующее:\n" +
                     "1) Иметь вид: add(int x, int y)\n" +
@@ -34,7 +34,7 @@ module.exports = {
                 updatedAt: new Date()
             },
             {
-                task_id: 3,
+                
                 task_name: "Создать функцию умножения",
                 task_description: "Функция должна делать следующее:\n" +
                     "1) Иметь вид: multiply(int x, int y)\n" +

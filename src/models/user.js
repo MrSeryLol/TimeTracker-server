@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.belongsToMany(models.Role, { through: models.UserRole });
       User.hasMany(models.UserRole);
-      User.belongsTo(models.Company);
+      User.belongsTo(models.Company, {foreignKey: 'company_id'});
       User.belongsToMany(models.Project, { through: models.UserProject });
       User.hasMany(models.UserProject);
       User.belongsToMany(models.Task, { through: models.UserTask });
@@ -25,15 +25,13 @@ module.exports = (sequelize, DataTypes) => {
     user_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrementIdentity: true,
-      allowNull: false,
+      autoIncrement: true,
     },
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     patronomyc: DataTypes.STRING,
     login: DataTypes.STRING,
     password: DataTypes.STRING,
-    schedule_id: DataTypes.INTEGER,
     company_id: DataTypes.INTEGER
   }, {
     sequelize,

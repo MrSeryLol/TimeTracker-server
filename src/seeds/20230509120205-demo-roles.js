@@ -14,16 +14,16 @@ module.exports = {
         */
         await queryInterface.bulkInsert('Roles', [
             {
-                role_id: 1,
+                
                 role: "Руководитель",
-                created_at: new Date(),
-                updated_at: new Date()
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
-                role_id: 2,
+                
                 role: "Сотрудник",
-                created_at: new Date(),
-                updated_at: new Date()
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         ]);
     },

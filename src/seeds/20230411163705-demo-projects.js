@@ -15,7 +15,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('Projects', [
             {
-                project_id: 1,
+                
                 project_name: "Создать программу",
                 project_description: "Описать этапы проектирования и прочего",
                 estimate_time: 20,
@@ -24,7 +24,7 @@ module.exports = {
                 updatedAt: new Date()
             },
             {
-                project_id: 2,
+                
                 project_name: "Создать дизайн",
                 project_description: "Описать дизайн",
                 estimate_time: 10,
@@ -33,7 +33,7 @@ module.exports = {
                 updatedAt: new Date()
             },
             {
-                project_id: 3,
+                
                 project_name: "Создать инструменты",
                 project_description: "Какие инструменты",
                 estimate_time: 1,
