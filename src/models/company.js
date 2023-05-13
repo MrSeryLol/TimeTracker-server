@@ -1,34 +1,31 @@
 'use strict';
 const {
-  Model
+    Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Company extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      Company.hasMany(models.User, {
-        foreignKey: 'company_id'
-      });
-      Company.hasMany(models.Project, {
-        foreignKey: 'project_id'
-      });
+    class Company extends Model {
+        static associate(models) {
+            // define association here
+            Company.hasMany(models.User, { foreignKey: 'company_id' });
+            Company.hasMany(models.Project, {
+                foreignKey: 'project_id'
+            });
+        }
     }
-  }
-  Company.init({
-    company_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    company_name: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Company',
-  });
-  return Company;
+    Company.init({
+        company_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notNull: true
+            }
+        }
+    }, {
+        sequelize,
+        underscored: true,
+        paranoid: true,
+        modelName: 'Company',
+        tableName: 'Companies'
+    });
+    return Company;
 };

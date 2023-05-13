@@ -15,8 +15,8 @@ module.exports = {
         await queryInterface.bulkInsert('Companies', [
             {
                 company_name: "Крутая комапния",
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             }
         ]);
     },

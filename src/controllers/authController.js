@@ -1,5 +1,5 @@
 const ErrorAPI = require('../error/errorAPI')
-const { User, UserRole, Role, Company, sequelize } = require('../models')
+const { User, Role, Company, sequelize } = require('../models')
 const bcrypt = require('bcrypt')
 
 class AuthController {
@@ -22,40 +22,37 @@ class AuthController {
                         role: "Руководитель"
                     }
                 })
-                
-                const company = await Company.create({
-                    company_name: company_name,
+
+                const user = await User.create({
+                    first_name: first_name,
+                    last_name: last_name,
+                    patronomyc: patronomyc,
+                    login: login,
+                    password: hashPassword,
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    Users: {
-                        first_name: first_name,
-                        last_name: last_name,
-                        patronomyc: patronomyc,
-                        login: login,
-                        password: hashPassword,
+                    Company: {
+                        company_name: company_name,
                         createdAt: new Date(),
                         updatedAt: new Date(),
-                        Roles: {
-                            role: role
-                        }
                     }
                 }, {
-                    include: [{
-                        model: User,
-                        include: [ Role ]
-                    }]
-                }, { transaction: transaction })
+                    include: {
+                        model: Company
+                    }
+                }, { transaction: transaction });
 
-                return res.json({ message: 'Пользователь успешно зарегистрирован!' })
-            })
-        } catch (err) {
-            console.log(err)
-            //next(ErrorAPI.badRequest(err.message))
-        }
+                user.addRole(user.id, role.id), { transaction: transaction };
+            return res.json({ user })
+        })
+    } catch(err) {
+        console.log(err)
+        //next(ErrorAPI.badRequest(err.message))
     }
+}
     async login(req, res) {
 
-    }
+}
 }
 
 module.exports = new AuthController()

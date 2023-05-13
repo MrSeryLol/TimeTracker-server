@@ -16,14 +16,14 @@ module.exports = {
             {
                 
                 role: "Руководитель",
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             },
             {
                 
                 role: "Сотрудник",
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             }
         ]);
     },

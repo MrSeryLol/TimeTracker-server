@@ -19,8 +19,8 @@ module.exports = {
                 task_description: "Испытать успешную установку программы",
                 priority: Sequelize.literal(`'Low'::"enum_Tasks_priority"`),
                 project_id: 1,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             },
             {
                 
@@ -30,8 +30,8 @@ module.exports = {
                     "2) Верно высчитывать значение\n",
                 priority: Sequelize.literal(`'Medium'::"enum_Tasks_priority"`),
                 project_id: 1,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             },
             {
                 
@@ -41,8 +41,8 @@ module.exports = {
                     "2) Верно высчитывать значение",
                 priority: Sequelize.literal(`'High'::"enum_Tasks_priority"`),
                 project_id: 1,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             },
         ]);
     },

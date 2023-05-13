@@ -20,8 +20,8 @@ module.exports = {
                 project_description: "Описать этапы проектирования и прочего",
                 estimate_time: 20,
                 company_id: 1,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             },
             {
                 
@@ -29,8 +29,8 @@ module.exports = {
                 project_description: "Описать дизайн",
                 estimate_time: 10,
                 company_id: 1,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             },
             {
                 
@@ -38,8 +38,8 @@ module.exports = {
                 project_description: "Какие инструменты",
                 estimate_time: 1,
                 company_id: 1,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             }
         ]);
     },
