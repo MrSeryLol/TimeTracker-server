@@ -16,6 +16,10 @@ class ErrorAPI extends Error {
     static forbidden(message) {
         return new ErrorAPI(403, message)
     }
+
+    static unauthorized(message) {
+        return new ErrorAPI(401, message)
+    }
 }
 
 module.exports = ErrorAPI

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     class Project extends Model {
         static associate(models) {
             // define association here
-            Project.belongsTo(models.Company, { foreignKey: 'project_id' });
+            Project.belongsTo(models.Company, { foreignKey: 'company_id' });
             Project.belongsToMany(models.User, { through: 'UserProjects' });
             //Project.hasMany(models.UserProject);
             Project.hasMany(models.Task, { foreignKey: 'project_id' });

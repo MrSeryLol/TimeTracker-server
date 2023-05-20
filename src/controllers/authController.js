@@ -3,14 +3,15 @@ const { User, Role, Company, sequelize } = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const generateAccessToken = (id, role) => {
+const generateAccessToken = (user_id, role, company_id, company_name) => {
     const payload = {
-        id, 
-        role
+        user_id, 
+        role,
+        company_id,
+        company_name
     }
     return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '24h'})
 }
-
 
 class AuthController {
     async registration(req, res, next) {
@@ -53,10 +54,10 @@ class AuthController {
                 }, { transaction: transaction });
 
                 await user.addRole(role.id, { transaction: transaction });
+
                 return res.json({ user })
             })
         } catch (err) {
-            //console.log(err)
             next(ErrorAPI.badRequest(err.message))
         }
     }
@@ -78,27 +79,24 @@ class AuthController {
 
             const role = await Role.findOne({
                 attributes: ['role'],
-                where: {
-                    role: 'Руководитель'
-                },
                 include: { 
                     model: User,
                 },
             })
-            console.log(role)
 
-            const token = generateAccessToken(user.id, role.role)
-
+            const company = await Company.findOne({
+                attributes: ['id', 'company_name'],
+                include: {
+                    model: User
+                }
+            })
+            const token = generateAccessToken(user.id, role.role, company.id, company.company_name)
 
             return res.json({token})
-
-            
-
 
         } catch(err) {
             next(ErrorAPI.badRequest(err.message))
         }
-
     }
 }
 
