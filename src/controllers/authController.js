@@ -69,6 +69,7 @@ class AuthController {
                     login: login
                 }
             })
+
             if (!user) {
                 return next(ErrorAPI.badRequest("Пользователь не найден"))
             }
@@ -78,16 +79,23 @@ class AuthController {
             }
 
             const role = await Role.findOne({
-                attributes: ['role'],
-                include: { 
+                include: {
                     model: User,
-                },
+                    through: { attributes: [] },
+                    where: {
+                        id: user.id
+                    }
+                }
             })
 
             const company = await Company.findOne({
+                where: {
+                    id: user.company_id
+                },
                 attributes: ['id', 'company_name'],
                 include: {
-                    model: User
+                    model: User,
+                    requred: true
                 }
             })
             const token = generateAccessToken(user.id, role.role, company.id, company.company_name)

@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
         }
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
-        req.userInfo = decoded 
+        req.userInfo = decoded
         next()
         
     } catch(err) {
