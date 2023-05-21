@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             //models.Role.belongsToMany(User, { through: 'UserRoles', as: 'Users' })
             //User.hasMany(models.UserRole);
             User.belongsTo(models.Company, { foreignKey: 'company_id' });
-            User.belongsToMany(models.Project, { through: 'UserProjects' });
+            User.belongsToMany(models.Project, { through: 'UserProjects', timestamps: false });
             //User.hasMany(models.UserProject);
             User.belongsToMany(models.Task, { through: 'UserTasks' });
             // User.hasMany(models.UserTask);

@@ -1,6 +1,7 @@
 const ErrorAPI = require('../error/errorAPI')
 const bcrypt = require('bcrypt')
-const {User, Role, sequelize} = require('../models')
+const {User, Role, Project, Company,  sequelize} = require('../models')
+const user = require('../models/user')
 
 class EmployeeController {
     async create(req, res, next) {
@@ -54,7 +55,30 @@ class EmployeeController {
                 company_id: companyId
             }
         })
-        res.json(employees)
+        return res.json(employees)
+    }
+
+    async addEmployeeToProject(req, res, next) {
+        const { user_id, project_id } = req.body
+
+        try {
+            const result = sequelize.transaction(async (transaction) => {
+                for (let id of user_id) {
+                    const employee = await User.findOne({
+                        attributes: ['id'],
+                        where: {
+                            id: id,
+                        }
+                    }, { transaction: transaction })
+
+                    await employee.addProject(project_id, { transaction: transaction }) 
+                }
+                
+                res.json({ message: "Сотрудники добавлены на проект!" })
+            })
+        } catch(err) {
+            next(ErrorAPI.badRequest("Сотрудники не были добавлены на проект!"))
+        }
     }
 }
 
