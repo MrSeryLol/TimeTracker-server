@@ -12,20 +12,12 @@ module.exports = {
          *   isBetaMember: false
          * }], {});
         */
-        await queryInterface.bulkInsert('Roles', [
+        await queryInterface.bulkInsert('UserProjects', [
             {
-                
-                role: "Руководитель",
-                created_at: new Date(),
-                updated_at: new Date()
-            },
-            {
-                
-                role: "Сотрудник",
-                created_at: new Date(),
-                updated_at: new Date()
+                user_id: 1,
+                project_id: 1
             }
-        ]);
+        ])
     },
 
     async down(queryInterface, Sequelize) {
@@ -35,6 +27,6 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete('Roles', null, {});
+        await queryInterface.bulkDelete('UserProjects', null, {})
     }
 };
