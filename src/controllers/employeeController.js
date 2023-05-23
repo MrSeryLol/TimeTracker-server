@@ -1,6 +1,7 @@
 const ErrorAPI = require('../error/errorAPI')
 const bcrypt = require('bcrypt')
 const {User, Role, Task, HistoryOfWork, Project, Company,  sequelize} = require('../models')
+const {Op} = require('sequelize')
 const user = require('../models/user')
 
 class EmployeeController {
@@ -62,17 +63,7 @@ class EmployeeController {
         const id = req.params.id;
         const employee = await User.findOne({
             attributes: [['id', 'user_id'], 'first_name', 'last_name', 'patronomyc'],
-            where: { id: id },
-            include: [
-                {
-                    model: Task,
-                    attributes: [['id', 'task_id'], 'task_name'],
-                },
-                {
-                    model: HistoryOfWork,
-                    attributes: [['id', 'history_id'], 'starting_time', 'ending_time', 'efficient_time'],
-                }
-            ]
+            where: { id: id }
         })
         return res.json(employee)
     }
@@ -96,6 +87,69 @@ class EmployeeController {
             })
         } catch(err) {
             next(ErrorAPI.badRequest("Сотрудники не были добавлены на проект!"))
+        }
+    }
+
+    async getEmployeeActivity(req, res, next) {
+        const { from, to } = req.query
+        const { id } = req.params
+
+        try {
+            const userActivity = await User.findOne({
+                attributes: [['id', 'user_id']],
+                where: { id: id },
+                include: [
+                    {
+                        model: Task,
+                        attributes: [['id', 'task_id'], 'task_name'],
+                        through: { attributes: [] },
+                    },
+                    {
+                        model: HistoryOfWork,
+                        attributes: [['id', 'history_id'], 'starting_time', 'ending_time', 'efficient_time'],
+                        where: { 
+                            starting_time: { [Op.gt]: new Date(from) },
+                            ending_time: { [Op.lt]: new Date(to) } 
+                        }
+                    }
+                ]
+            })
+            return res.json(userActivity)
+        } catch(err) {
+            return next(ErrorAPI.badRequest("Некорректный ввод даты!"))
+        }
+    }
+
+    async getEmployeeTask(req, res, next) {
+        const { from, to } = req.query
+        const { id } = req.params
+        const { task_id } = req.body
+
+        try {
+            const userTask = await User.findOne({
+                attributes: [['id', 'user_id']],
+                where: { id: id },
+                include: [
+                    {
+                        model: Task,
+                        attributes: [['id', 'task_id'], 'task_name', 'task_description'],
+                        where: { id: task_id },
+                        through: { attributes: [] },
+                    },
+                    {
+                        model: HistoryOfWork,
+                        attributes: [['id', 'history_id'], 'starting_time', 'ending_time', 'efficient_time'],
+                        where: { 
+                            task_id: task_id,
+                            starting_time: { [Op.gt]: new Date(from) },
+                            ending_time: { [Op.lt]: new Date(to) } 
+                        }
+                    }
+                ]
+            })
+            return res.json(userTask)
+        } catch(err) {
+            return next(ErrorAPI.badRequest("Некорректный ввод задачи!"))
         }
     }
 }
