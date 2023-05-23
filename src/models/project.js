@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             Project.belongsToMany(models.User, { through: 'UserProjects', timestamps: false });
             //Project.hasMany(models.UserProject);
             Project.hasMany(models.Task, { foreignKey: 'project_id' });
-            Project.hasMany(models.HistoryOfWork);
+            Project.hasMany(models.HistoryOfWork, { foreignKey: 'project_id' });
         }
     }
     Project.init({

@@ -4,16 +4,11 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class HistoryOfWork extends Model {
-        /**
-         * Helper method for defining associations.
-         * This method is not a part of Sequelize lifecycle.
-         * The `models/index` file will call this method automatically.
-         */
         static associate(models) {
             // define association here
-            HistoryOfWork.belongsTo(models.Project);
-            HistoryOfWork.belongsTo(models.Task);
-            HistoryOfWork.belongsTo(models.User);
+            HistoryOfWork.belongsTo(models.Project, { foreignKey: 'project_id' });
+            HistoryOfWork.belongsTo(models.Task, { foreignKey: 'task_id' });
+            HistoryOfWork.belongsTo(models.User, { foreignKey: 'user_id'});
         }
     }
     HistoryOfWork.init({

@@ -6,10 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     class Task extends Model {
         static associate(models) {
             // define association here
-            Task.belongsToMany(models.User, { through: 'UserTasks' });
+            Task.belongsToMany(models.User, { through: 'UserTasks', timestamps: false });
             //Task.hasMany(models.User, { through: });
             Task.belongsTo(models.Project, { foreignKey: 'project_id' });
-            Task.hasMany(models.HistoryOfWork);
+            Task.hasMany(models.HistoryOfWork, { foreignKey: 'task_id' });
         }
     }
     Task.init({

@@ -1,6 +1,6 @@
 const ErrorAPI = require('../error/errorAPI')
 const bcrypt = require('bcrypt')
-const {User, Role, Project, Company,  sequelize} = require('../models')
+const {User, Role, Task, HistoryOfWork, Project, Company,  sequelize} = require('../models')
 const user = require('../models/user')
 
 class EmployeeController {
@@ -47,7 +47,7 @@ class EmployeeController {
             next(ErrorAPI.badRequest(err.message))
         }
     }
-    async getAllEmployeesByCompany(req, res, next) {
+    async getAllEmployeesByCompany(req, res) {
         const companyId = req.userInfo.company_id
 
         const employees = await User.findAll({
@@ -58,9 +58,27 @@ class EmployeeController {
         return res.json(employees)
     }
 
+    async getOneEmployee(req, res) {
+        const id = req.params.id;
+        const employee = await User.findOne({
+            attributes: [['id', 'user_id'], 'first_name', 'last_name', 'patronomyc'],
+            where: { id: id },
+            include: [
+                {
+                    model: Task,
+                    attributes: [['id', 'task_id'], 'task_name'],
+                },
+                {
+                    model: HistoryOfWork,
+                    attributes: [['id', 'history_id'], 'starting_time', 'ending_time', 'efficient_time'],
+                }
+            ]
+        })
+        return res.json(employee)
+    }
+
     async addEmployeeToProject(req, res, next) {
         const { user_id, project_id } = req.body
-
         try {
             const result = sequelize.transaction(async (transaction) => {
                 for (let id of user_id) {

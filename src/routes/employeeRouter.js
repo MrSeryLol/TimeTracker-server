@@ -5,6 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware')
 const checkRoleMiddleware = require('../middleware/checkRoleMiddleware')
 
 router.get('/', authMiddleware, employeeController.getAllEmployeesByCompany)
+router.get('/:id', authMiddleware, employeeController.getOneEmployee)
 router.post('/', checkRoleMiddleware("Руководитель"), employeeController.create)
 router.post('/addToProject', checkRoleMiddleware("Руководитель"), employeeController.addEmployeeToProject)
 

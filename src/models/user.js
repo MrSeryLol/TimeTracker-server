@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
             User.belongsTo(models.Company, { foreignKey: 'company_id' });
             User.belongsToMany(models.Project, { through: 'UserProjects', timestamps: false });
             //User.hasMany(models.UserProject);
-            User.belongsToMany(models.Task, { through: 'UserTasks' });
+            User.belongsToMany(models.Task, { through: 'UserTasks', timestamps: false });
             // User.hasMany(models.UserTask);
-            User.hasMany(models.HistoryOfWork);
+            User.hasMany(models.HistoryOfWork, { foreignKey: 'user_id' });
         }
     }
     User.init({
