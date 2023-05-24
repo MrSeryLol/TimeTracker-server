@@ -22,7 +22,8 @@ class TaskController {
                     priority: 'Low',
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    project_id: project.id
+                    project_id: project.id,
+                    company_id: companyId
                 }, { transaction: transaction })
 
                 return res.json({ task })
