@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             //Task.hasMany(models.User, { through: });
             Task.belongsTo(models.Project, { foreignKey: 'project_id' });
             Task.hasMany(models.HistoryOfWork, { foreignKey: 'task_id' });
+            Task.belongsTo(models.Company, { foreignKey: 'company_id'})
         }
     }
     Task.init({
